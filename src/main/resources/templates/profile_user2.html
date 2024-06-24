@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="h.png" type="image/x-icon">
+    <title>user профиль</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .profile-container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 1000px;
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .profile-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .profile-header {
+            display: flex;
+            justify-content: center; /* Центрируем содержимое по горизонтали */
+        }
+
+        .buttons-container {
+            position: absolute;
+            top: 640px;
+            bottom: 10px; /* располагаем кнопки снизу */
+            left: 35%; /* располагаем кнопки по центру */
+            transform: translateX(-50%); /* смещаем кнопки на половину их ширины влево */
+        }
+
+
+        .profile-image {
+            width: 500px;
+            height: 500px;
+            border-radius: 10px; /* Изменено на квадратную форму */
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        .attribute-icons {
+            background-color: #fff; /* Добавляем белый фон для видимости */
+            padding: 20px; /* Добавляем отступы для красоты */
+            border-radius: 25px; /* Закругляем углы, чтобы совпадало с основным контейнером */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Добавляем тень для эффекта */
+            margin-left: 70px; /* Добавляем отступ слева для разделения от изображения */
+            align-self: center; /* Выравниваем по вертикали по центру */
+        }
+
+        .attribute-icons .attribute-icon {
+            margin: 5px; /* Уменьшаем отступы между иконками */
+        }
+
+        .attribute-icons div {
+            margin-right: 10px;
+            margin-bottom: 10px; /* Добавлен отступ снизу для разделения строк */
+        }
+
+        .attribute-icon {
+            width: auto;
+            height: auto;
+            padding: 10px;
+            border-radius: 20px; /* Подкорректирован радиус */
+            background-color: rgba(128, 128, 128, 0.5); /* серый цвет с прозрачностью 50% */
+            margin-right: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px; /* Уменьшен размер шрифта */
+            font-weight: bold;
+            overflow: hidden; /* Обрезаем лишний текст */
+        }
+
+        .attribute-icon img {
+            width: 24px; /* Размер изображения */
+            height: 22px;
+            margin-right: 5px; /* Отступ между изображением и текстом */
+            vertical-align: middle; /* Выравнивание изображения по вертикали */
+        }
+
+        .attribute-icon span {
+            max-width: 100%; /* Максимальная ширина для текста */
+            white-space: nowrap; /* Текст не переносится */
+            text-overflow: ellipsis; /* Текст обрезается с многоточием, если не вмещается */
+        }
+
+        .profile-image-container {
+            position: relative;
+            display: inline-flex;
+        }
+
+        .image-text {
+            position: absolute;
+            top: 10px; /* Позиция надписей сверху изображения */
+            left: 10px; /* Позиция надписей слева от изображения */
+            color: white; /* Цвет текста */
+            font-size: 18px; /* Размер шрифта */
+            display: inline-flex; /* Изменено на inline-flex */
+        }
+
+        .buttons-container {
+            position: absolute;
+            top: 590px;
+            left: 40%; /* Позиционируем по центру */
+            transform: translateX(-50%); /* Центрируем по горизонтали */
+            display: flex; /* Используем flexbox для расположения кнопок в ряд */
+            justify-content: center; /* Центрируем кнопки внутри контейнера */
+            gap: 20px; /* Добавляем отступ между кнопками */
+        }
+
+        .buttons-container button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 20px;
+            cursor: pointer;
+            background-color: rgba(128, 128, 128, 0.5); /* серый цвет с прозрачностью 50% */
+            color: #fff;
+            border: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            overflow: hidden; /* скрываем выход за границы */
+        }
+
+        .buttons-container button img {
+            width: 80%; /* ширина изображения равна ширине кнопки */
+            height: 80%; /* высота изображения равна высоте кнопки */
+            object-fit: contain; /* вписываем изображение в кнопку */
+        }
+
+        .buttons-container button:last-child {
+            margin-right: 0;
+        }
+
+        .buttons-container button:hover {
+            background-color: rgba(128, 128, 128, 0.5); /* серый цвет с прозрачностью 50% */
+            transform: scale(1.1);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .additional-buttons {
+            position: absolute;
+            left: 12%;
+            top: 55%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1; /* Установка z-index, чтобы кнопки были выше других элементов, если это необходимо */
+        }
+
+        .additional-buttons button {
+            width: 80px;
+            height: 80px;
+            border-radius: 80%;
+            margin-bottom: 40px;
+            cursor: pointer;
+            background-color: #d1a1b8;
+            color: #fff;
+            border: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+        }
+
+        .additional-buttons button:hover {
+            background-color: #d1a1b8;
+            transform: scale(1.1);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal {
+            display: none; /* По умолчанию модальное окно скрыто */
+            position: fixed;
+            z-index: 9999; /* Устанавливаем высокий уровень z-index, чтобы модальное окно было поверх всего */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Прозрачный черный цвет фона */
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 8% auto; /* Положение модального окна по центру экрана */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 25%;
+            border-radius: 10px;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+        }
+
+        .modal-body {
+            text-align: center; /* Центрируем содержимое по горизонтали */
+            display: flex; /* Размещаем кнопки в одной строке */
+            justify-content: center; /* Центрируем кнопки по горизонтали */
+            align-items: center; /* Центрируем кнопки по вертикали */
+            flex-wrap: nowrap; /* Запрещаем перенос элементов на следующую строку */
+        }
+
+        /* Стили для контейнера фотографии */
+        .photo-container {
+            text-align: center; /* Центрируем содержимое по горизонтали */
+            margin-bottom: 20px; /* Добавляем отступ между фотографией и кнопками */
+        }
+
+        /* Стили для кнопок */
+        .buttons-container2 {
+            text-align: center; /* Центрируем содержимое по горизонтали */
+        }
+
+        /* Стили для изображения в модальном окне */
+        .modal-body img {
+            display: block; /* Превращаем изображение в блочный элемент */
+            margin: 0 auto; /* Центрируем изображение по горизонтали */
+            max-width: 100%; /* Устанавливаем максимальную ширину изображения в зависимости от родительского контейнера */
+            height: auto; /* Поддерживаем пропорции изображения */
+        }
+
+        .modal-body button {
+            margin: 10px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #9a7284;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 15px;
+        }
+
+        .modal-body button:hover {
+            background-color: #9a7284;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            z-index: 999;
+        }
+
+        .buttons-container {
+            margin-top: 3px; /* Добавлен отступ сверху */
+            display: flex;
+            justify-content: center;
+        }
+
+        .buttons-container button {
+            /* Старые стили остаются без изменений */
+            width: 80%;
+            max-width: 200px;
+            padding: 15px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            background-color: #9a7284;
+            color: #fff;
+            border: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+            font-size: 16px;
+            font-weight: bold;
+
+            /* Новые стили для выравнивания текста по центру */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center; /* Для поддержки IE */
+        }
+
+        .buttons-container button:hover {
+            /* Старые стили остаются без изменений */
+            background-color: #7a5064;
+            transform: scale(1.05);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+
+
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="additional-buttons">
+    <button onclick="location.href='/matches'">matches</button>
+    <form action="/search" method="get">
+        <button type="submit">search</button>
+    </form>
+    <form action="/updateprof" method="post">
+        <button type="submit">profile</button>
+    </form>
+</div>
+<div class="content-wrapper">
+    <div class="profile-container">
+        <div class="profile-title" th:text="${match.name + ', ' + match.age}"></div>
+        <div class="profile-header">
+            <div class="profile-image-container">
+                <img th:src="${match.photoUrl}" alt="Profile Picture" class="profile-image">
+                <div class="image-text">
+                    <div class="attribute-icon">
+                        <img src="img/gas-kvas-com-p-znachok-obrazovaniya-na-prozrachnom-fone-15-transformed.png" alt="City Icon">
+                        <span th:text="${match.city}"></span>
+                    </div>
+                    <div class="attribute-icon">
+                        <img src="img/journal-group-hug.png" alt="City Icon">
+                        <span th:text="${match.intent}"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="attribute-icons">
+                <div class="attribute-icon">
+                    <img src="img/850ae9e24662fce57659baa33345f3e6.png" alt="Gemini Icon">
+                    <span th:text="${match.zodiac_sign}"></span>
+                </div>
+                <div class="attribute-icon">
+                    <img src="img/ruler-icon-258055-transformed.png" alt="Height Icon">
+                    <span th:text="${match.height + ' см'}"></span>
+                </div>
+                <div class="attribute-icon">
+                    <img src="img/gas-kvas-com-p-znachok-obrazovaniya-na-prozrachnom-fone-15-transformed.png" alt="Education Icon">
+                    <span th:text="${match.education}"></span>
+                </div>
+                <div class="attribute-icon">
+                    <img src="img/unnamed-so8hdgwrs-transformed.png" alt="Desire Icon">
+                    <span th:text="${match.children}"></span>
+                </div>
+                <div class="attribute-icon">
+                    <img src="img/beer-1024-transformed.webp" alt="Neutral Icon">
+                    <span th:text="${match.alcohol_preference}"></span>
+                </div>
+                <div class="attribute-icon">
+                    <img src="img/unnamed_(1)-transformed.png" alt="Negative Icon">
+                    <span th:text="${match.smoking_preference}"></span>
+                </div>
+                <span th:text="${match.bio}"></span>
+            </div>
+            <div class="buttons-container">
+                <button onclick="location.href='/matches'">назад</button>
+                <button id="generateLinkButton">telegram</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+<!-- для генерации и перенаправления на tg -->
+<script th:inline="javascript">
+    document.getElementById("generateLinkButton").addEventListener("click", function() {
+        var email = /*[[${match.email}]]*/ '';
+        var link = "https://t.me/" + email;
+        window.open(link, "_blank");
+    });
+</script>

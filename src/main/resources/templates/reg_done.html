@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="h.png" type="image/x-icon">
+    <title>завершение регистрации</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            box-sizing: border-box;
+            position: relative;
+            height: 100%;
+            justify-content: center;
+        }
+
+        .registration-container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .registration-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .registration-message {
+            margin-bottom: 30px;
+        }
+
+        .registration-button {
+            padding: 10px 20px;
+            background-color: #d16858;
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .registration-button:hover {
+            background-color: #a6483d;
+        }
+    </style>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<form action="/submit_prof" method="post">
+<div class="content-wrapper">
+    <div class="registration-container">
+        <div class="registration-title">Регистрация завершена</div>
+        <h2>Текущие данные</h2>
+        <p>Имя: <span th:text="${user.name}"></span></p>
+        <p>Возраст: <span th:text="${user.age}"></span></p>
+        <p>Пол: <span th:text="${user.gender}"></span></p>
+        <p>tg: <span th:text="${user.email}"></span></p>
+        <p>preference: <span th:text="${user.preference}"></span></p>
+        <p>pass: <span th:text="${user.password}"></span></p>
+
+        <div class="registration-message">Теперь вы можете перейти к заполнению профиля.</div>
+        <button type="submit" class="registration-button">Перейти к заполнению профиля</button>
+    </div>
+</div>
+</form>
+</body>
+</html>

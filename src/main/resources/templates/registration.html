@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="h.png" type="image/x-icon">
+    <title>регистрация</title>
+    <link rel="stylesheet" href="log_style.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-image: url('img/reg.png');
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: flex-end; /* Выравнивание по правой стороне */
+            align-items: center;
+            height: 100vh; /* Для вертикального центрирования */
+        }
+
+        .registration-container {
+            background-color: #fff;
+            z-index: 9999;
+            padding: 60px;
+            border-radius: 25px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%; /* Измените на ваше предпочтение */
+            max-width: 400px; /* Примерное значение */
+            max-height: 80vh;
+            overflow-y: auto; /* Добавляем вертикальную прокрутку */
+            margin-right: 200px; /* Отступ от правого края */
+        }
+
+        /* Опционально: стили для скроллбара */
+        .registration-container::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .registration-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .registration-container::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+
+        .registration-container::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .tab {
+            display: none;
+        }
+
+        .tab button {
+            margin-bottom: 10px; /* Добавляем отступ снизу для кнопок */
+            width: calc(100% - 20px); /* Делаем кнопки по ширине контейнера с учетом отступов */
+        }
+
+        .tab button:last-child {
+            margin-bottom: 0; /* Убираем отступ снизу у последней кнопки */
+        }
+
+        .radio-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Выравнивание по левому краю */
+        }
+
+        .radio-buttons label {
+            margin-bottom: 10px;
+            position: relative;
+            left: 5%;
+            top: 28px;
+        }
+
+        .radio-buttons label > input[type="radio"] {
+            display: table-cell;
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<form action="/submit" method="post">
+    <div class="content2">
+        <img src="img/active-avatars-of-happy-young-people.gif">
+    </div>
+    <div class="registration-container">
+        <div>
+            <h2>Введите имя</h2>
+            <input type="text" id="name" name="name" placeholder="Ваше имя" required>
+        </div>
+
+        <div>
+            <h2>Введите возраст</h2>
+            <input type="number" id="age" name="age" placeholder="Ваш возраст" required>
+
+        </div>
+
+        <div>
+            <h2>Выберите свой пол</h2>
+            <div class="radio-buttons">
+                <label for="maleRadio">Мужчина</label>
+                <input type="radio" id="maleRadio" name="gender" value="male">
+
+                <label for="femaleRadio">Женщина</label>
+                <input type="radio" id="femaleRadio" name="gender" value="female">
+            </div>
+        </div>
+
+        <div>
+            <h2>Кого вам показывать?</h2>
+            <div class="radio-buttons">
+                <label for="malePreferenceRadio">Мужчин</label>
+                <input type="radio" id="malePreferenceRadio" name="preference" value="male">
+
+                <label for="femalePreferenceRadio">Женщин</label>
+                <input type="radio" id="femalePreferenceRadio" name="preference" value="female">
+
+                <label for="anyPreferenceRadio">Все равно</label>
+                <input type="radio" id="anyPreferenceRadio" name="preference" value="any">
+            </div>
+        </div>
+
+        <div>
+            <h2>Введите ваш tg</h2>
+            <input type="text" id="email" name="email" placeholder="Ваш tg" required>
+        </div>
+
+        <div>
+            <h2>Введите ваш пароль</h2>
+            <input type="text" id="password" name="password" placeholder="Ваш пароль" required>
+
+        </div>
+        <button type="submit">Далее</button>
+    </div>
+</form>
+</body>
+</html>

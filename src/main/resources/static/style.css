@@ -1,0 +1,192 @@
+body{
+    margin: 0
+}
+.wrapper{
+    height: 100vh;
+    background: url(img/mai.png);
+    background-size: cover;
+    padding-left: 200px;
+}
+.logo,.menu{
+    display: inline-block;
+}
+header{
+    padding-top: 88px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 118px 210px 0;
+}
+.menu{
+    display: flex;
+    align-items: center;
+}
+.menu__item{
+    position: relative;
+    margin-right: 40px;
+    font: bold 22px/26px MuseoSansCyrl100, arial, helvetica, sans-serif;
+    color: #F8EEE4;
+    text-decoration: none;
+    transition: opacity .5s;
+}
+.menu__item:last-child{
+    margin-right: 0;
+}
+.menu__item:after{
+    position: absolute;
+    display: block;
+    content: '';
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #F8EEE4;
+    opacity: 0;
+    transition: opacity .5s;
+}
+.menu__item:hover:after{
+    opacity: 1;
+}
+@charset "UTF-8";
+.main{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.main__content_title {
+    margin-bottom: 0;
+    padding: 0;
+    position: absolute;
+    top: 20%;
+    left: 7%;
+    font-size: 98px; /* Размер шрифта */
+    line-height: 130px; /* Межстрочный интервал */
+    color: #F8EEE4;
+}
+
+.main__content_text {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 60%;
+    left: 10%;
+    font-family: 'Arial', sans-serif;
+    font-size: 22px;
+    line-height: 26px;
+    color: #F8EEE4;
+    max-width: 555px;
+}
+
+.main__img{
+    display: flex;
+    align-items: center;
+    padding-top: 10px;
+}
+.main__img-1,.main__img-2{
+    margin-right: 33px;
+}
+.main__img-1:hover,.main__img-2:hover,.main__img-3:hover{
+    transform: scale(1.5);
+    transition: 2s;
+}
+@keyframes flash {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+.main__content_button {
+    margin: 0; /* Убираем внешние отступы кнопки */
+    padding: 0; /* Убираем внутренние отступы кнопки */
+    position: absolute; /* Позиционируем кнопку абсолютно */
+    top: 80%; /* Располагаем кнопку над фотографией */
+    left: 10%; /* Отступ слева для кнопки */
+    font: bold 22px/26px MuseoSansCyrl100, arial, helvetica, sans-serif; /* Сохраняем размер и шрифт кнопки */
+    color: #aac6fc; /* Цвет текста кнопки */
+    background-color: #f2f6e6; /* Цвет фона кнопки */
+    padding: 18px 92px; /* Размеры кнопки */
+    border-radius: 48px; /* Радиус скругления кнопки */
+    transition: .5s; /* Плавное изменение стилей при наведении */
+    animation-name: flash; /* Анимация мигания кнопки */
+    animation-iteration-count: 5;
+    animation-duration: 3s;
+    text-decoration: none; /* Убираем подчеркивание */
+    animation-timing-function: ease-in-out;
+}
+.main__content_button:hover{
+    transform: scale(1.1);
+}
+@media (min-width: 950px){
+    .hamburger-menu{
+        display: none;
+    }
+}
+@media (min-width: 1165px) {
+    .main__img-4{
+        display: none;
+    }
+}
+@media (max-width: 6000px) {
+    .wrapper{
+        padding-left: 142px;
+    }
+    header{
+        padding-top: 62px;
+        margin: 0 83px 148px 0;
+    }
+    .logo{
+        width: 104px;
+        height: 39px;
+        background-size: cover;
+    }
+    .menu__item{
+        margin-right: 28px;
+        font: bold 16px/19px MuseoSansCyrl100, arial, helvetica, sans-serif;
+    }
+    .main__content{
+        background-size: 90%;
+    }
+    .main__content_title{
+        margin-bottom: 14px;
+        padding: 52px 0 0 60px;
+    }
+    .main__content_text{
+        margin: 0 0 24px 0;
+        padding-left: 16px;
+        font-family: 'Arial', sans-serif;
+        max-width: 400px;
+    }
+    .main__img{
+        padding-top: 12px;
+    }
+    .main__content_button{
+        font: bold 16px/19px MuseoSansCyrl100, arial, helvetica, sans-serif;
+        padding: 12px 65px;
+        margin-left: 16px;
+        text-decoration: none; /* Убираем подчеркивание */
+    }
+}
+@media (max-width: 1164px) {
+    .wrapper{
+        padding-left: 42px;
+    }
+    header{
+        margin: 0 40px 153px 0;
+    }
+    .main__content_title{
+        padding-top: 49px;
+    }
+    .main__img{
+        padding-top: 12px;
+    }
+    .main__content_button{
+        font: bold 16px/19px MuseoSansCyrl100, arial, helvetica, sans-serif;
+        padding: 12px 65px;
+        margin-left: 16px;
+        text-decoration: none; /* Убираем подчеркивание */
+    }
+}
+

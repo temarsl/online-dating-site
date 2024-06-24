@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>match</title>
+    <link rel="icon" href="h.png" type="image/x-icon">
+    <style>
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            box-sizing: border-box;
+            position: relative;
+            height: 100vh; /* Задаем высоту в 100% высоты видимой области браузера */
+            overflow-y: auto; /* Разрешаем вертикальную прокрутку при необходимости */
+        }
+
+        .attribute-icons {
+            width: 1000px;
+            background-color: #fff; /* Добавляем белый фон для видимости */
+            padding: 20px; /* Добавляем отступы для красоты */
+            border-radius: 25px; /* Закругляем углы, чтобы совпадало с основным контейнером */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Добавляем тень для эффекта */
+            margin-left: 20px; /* Добавляем отступ слева для разделения от изображения */
+            align-self: center; /* Выравниваем по вертикали по центру */
+        }
+
+        .attribute-icons .attribute-icon {
+            margin: 5px; /* Уменьшаем отступы между иконками */
+        }
+
+        .attribute-icons div {
+            margin-right: 10px;
+            margin-bottom: 10px; /* Добавлен отступ снизу для разделения строк */
+        }
+
+        .attribute-icon {
+            width: auto;
+            height: 70px;
+            padding: 10px;
+            border-radius: 20px;
+            background-color: rgba(125, 93, 105, 0.5); /* Прозрачный цвет */
+            margin-right: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            font-weight: bold;
+            overflow: hidden;
+        }
+
+
+        .attribute-icon span,
+        .attribute-icon div {
+            font-size: 18px;
+        }
+
+        .attribute-icons .attribute-icon {
+            margin: 15px; /* Увеличиваем отступ между иконками */
+        }
+
+        .attribute-icon img {
+            width: 80px; /* Устанавливаем ширину изображения */
+            height: 80px; /* Устанавливаем высоту изображения */
+            margin-right: 10px; /* Оставляем отступ между изображением и текстом */
+            object-fit: cover; /* Обрезаем изображение посередине и превращаем в квадрат */
+            object-position: center; /* Позиционируем изображение по центру */
+        }
+
+        .attribute-icon span {
+            max-width: 100%; /* Максимальная ширина для текста */
+            white-space: nowrap; /* Текст не переносится */
+            text-overflow: ellipsis; /* Текст обрезается с многоточием, если не вмещается */
+        }
+
+        .buttons-container button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 20px;
+            cursor: pointer;
+            background-color: #92a4b9;
+            color: #fff;
+            border: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            overflow: hidden; /* скрываем выход за границы */
+        }
+        .buttons-container button img {
+            width: 80%; /* ширина изображения равна ширине кнопки */
+            height: 80%; /* высота изображения равна высоте кнопки */
+            object-fit: contain; /* вписываем изображение в кнопку */
+        }
+
+        .buttons-container button:last-child {
+            margin-right: 0;
+        }
+
+        .buttons-container button:hover {
+            background-color: #92a4b9;
+            transform: scale(1.1);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .additional-buttons {
+            position: absolute;
+            left: 12%;
+            top: 55%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1; /* Установка z-index, чтобы кнопки были выше других элементов, если это необходимо */
+        }
+
+        .additional-buttons button {
+            width: 80px;
+            height: 80px;
+            border-radius: 80%;
+            margin-bottom: 40px;
+            cursor: pointer;
+            background-color: #d1a1b8;
+            color: #fff;
+            border: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+        }
+
+        .additional-buttons button:hover {
+            background-color: #d1a1b8;
+            transform: scale(1.1);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .attribute-icon:hover {
+            background-color: rgba(125, 93, 105, 0.8); /* Устанавливаем более темный цвет фона при наведении */
+        }
+
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="additional-buttons">
+    <button onclick="location.href='/matches'">matches</button>
+    <form action="/search" method="get">
+        <button type="submit">search</button>
+    </form>
+    <form action="/updateprof" method="post">
+        <button type="submit">profile</button>
+    </form>
+</div>
+<div class="content-wrapper">
+    <h1>Ваши совпадения</h1>
+    <div class="attribute-icons">
+        <div th:each="match : ${matches}" class="attribute-icon" th:data-id="${match.id}">
+                <img th:src="@{${match.photoUrl}}" alt="Profile Picture">
+                <div class="profile-info">
+                    <span th:text="${match.name} + ','">Имя пользователя</span>
+                </div>
+                <div class="profile-info">
+                    <span th:text="'tg: ' + ${match.email}">Email пользователя</span>
+                </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Получаем все элементы с классом .attribute-icon
+        var attributeIcons = document.querySelectorAll(".attribute-icon");
+
+        // Добавляем обработчик события клика для каждого элемента
+        attributeIcons.forEach(function(icon) {
+            icon.addEventListener("click", function() {
+                // Получаем ID пользователя из атрибута data-id
+                var userId = icon.getAttribute("data-id");
+                // Перенаправляем пользователя на страницу profile_user с соответствующим ID
+                window.location.href = '/profile_user2?id=' + userId;
+            });
+        });
+    });
+</script>
